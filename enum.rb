@@ -33,4 +33,10 @@ module Enumerable
     my_each { |index| break new_array = false if yield(index) }
     new_array
   end
+
+  def my_count(parameter)
+    count = 0
+    my_each { |index| count += 1 if parameter == index }
+    count
+  end
 end
