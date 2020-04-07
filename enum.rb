@@ -21,4 +21,10 @@ module Enumerable
     my_each { |index| break new_array = false unless yield(index) }
     new_array
   end
+
+  def my_any?
+    new_array = false
+    my_each { |index| break new_array = true if yield(index) }
+    new_array
+  end
 end
