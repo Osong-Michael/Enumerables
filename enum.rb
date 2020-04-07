@@ -27,4 +27,10 @@ module Enumerable
     my_each { |index| break new_array = true if yield(index) }
     new_array
   end
+
+  def my_none?
+    new_array = true
+    my_each { |index| break new_array = false if yield(index) }
+    new_array
+  end
 end
