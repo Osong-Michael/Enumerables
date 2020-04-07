@@ -8,7 +8,6 @@
 
 # my_proc = proc { |num| num * 2 }
 
-
 # # ARRAY TO TEST CODE
 # test_array = [4, 5, 6, 3, 7]
 # puts "Test  Array = #{test_array}"
