@@ -9,4 +9,16 @@ module Enumerable
     length.times { |index| yield(self[index], index) }
     self
   end
+
+  def my_select
+    array = []
+    my_each { |index| array << index if yield(index) }
+    array
+  end
+
+  def my_all?
+    new_array = true
+    my_each { |index| break new_array = false unless yield(index) }
+    new_array
+  end
 end
