@@ -39,4 +39,15 @@ module Enumerable
     my_each { |index| count += 1 if parameter == index }
     count
   end
+
+  def my_map(proc)
+    mapped = []
+    my_each { |index| mapped << (proc.nil? ? proc.call(index) : yield(index)) }
+    mapped
+  end
+
+  def my_inject(total = 0)
+    my_each { |index| total = yield(total, index) }
+    total
+  end
 end
