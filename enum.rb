@@ -22,9 +22,15 @@ module Enumerable
     array
   end
 
-  def my_all?
+  def my_all?(*val)
     new_array = true
-    my_each { |index| break new_array = false unless yield(index) }
+    if !val[0].nil?
+      my_each { |index| new_array = false unless val[0] === index }
+    elsif !block_given?
+      my_each { |index| new_array = false unless index }
+    else
+      my_each { |index| new_array = false unless yield(index) }
+    end
     new_array
   end
 
@@ -48,7 +54,7 @@ module Enumerable
 
   def my_map(proc)
     return to_enum :my_map unless block_given?
-    
+
     mapped = []
     my_each { |index| mapped << (proc.nil? ? proc.call(index) : yield(index)) }
     mapped
