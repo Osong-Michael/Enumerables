@@ -34,9 +34,15 @@ module Enumerable
     new_array
   end
 
-  def my_any?
+  def my_any?(*val)
     new_array = false
-    my_each { |index| break new_array = true if yield(index) }
+    if !val[0].nil?
+      my_each { |index| new_array = true if val[0] === index }
+    elsif !block_given?
+      my_each { |index| new_array = true if index }
+    else
+      my_each { |index| new_array = true if yield(index) }
+    end
     new_array
   end
 
