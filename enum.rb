@@ -50,9 +50,16 @@ module Enumerable
     !my_any?(val, &block)
   end
 
-  def my_count(parameter)
+  def my_count(parameter = nil)
     count = 0
-    my_each { |index| count += 1 if parameter == index }
+
+    if block_given?
+      my_each { |index| count += 1 if yield(index) }
+    elsif parameter
+      my_each { |index| count += 1 if index == parameter }
+    else
+      count = size
+    end
     count
   end
 
