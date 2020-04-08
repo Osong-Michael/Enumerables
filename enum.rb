@@ -46,10 +46,8 @@ module Enumerable
     new_array
   end
 
-  def my_none?
-    new_array = true
-    my_each { |index| break new_array = false if yield(index) }
-    new_array
+  def my_none?(val = nil, &block)
+    !my_any?(val, &block)
   end
 
   def my_count(parameter)
