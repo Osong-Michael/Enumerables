@@ -51,4 +51,3 @@
 # # multiply_els method
 # puts 'multiply_els:'
 # p multiply_els(test_array)
-
