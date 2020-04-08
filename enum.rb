@@ -1,16 +1,22 @@
 #:nodoc:
 module Enumerable
   def my_each
+    return to_enum :my_each unless block_given?
+
     length.times { |index| yield(self[index]) }
     self
   end
 
   def my_each_with_index
+    return to_enum :my_each unless block_given?
+
     length.times { |index| yield(self[index], index) }
     self
   end
 
   def my_select
+    return to_enum :my_select unless block_given?
+
     array = []
     my_each { |index| array << index if yield(index) }
     array
@@ -41,6 +47,8 @@ module Enumerable
   end
 
   def my_map(proc)
+    return to_enum :my_map unless block_given?
+    
     mapped = []
     my_each { |index| mapped << (proc.nil? ? proc.call(index) : yield(index)) }
     mapped
