@@ -71,8 +71,22 @@ module Enumerable
     mapped
   end
 
-  def my_inject(total = 0)
-    my_each { |index| total = yield(total, index) }
-    total
+  def my_inject(*val)
+    array = is_a?(Array) ? self : to_a
+    new_array = val[0] if val[0].is_a? Integer
+
+    if val[0].is_a?(Symbol) || val[0].is_a?(String)
+      sym = val[0]
+    elsif val[0].is_a?(Integer)
+      sym = val[1] if val[1].is_a?(Symbol) || val[1].is_a?(String)
+    end
+
+    if sym
+      array.my_each { |index| new_array = new_array ? new_array.send(sym, index) : index }
+    else
+      array.my_each { |index| new_array = new_array ? yield(new_array, index) : index }
+    end
+
+    new_array
   end
 end
