@@ -56,11 +56,11 @@ module Enumerable
     count
   end
 
-  def my_map(proc)
+  def my_map(proc = nil)
     return to_enum :my_map unless block_given?
 
     mapped = []
-    my_each { |index| mapped << (proc.nil? ? proc.call(index) : yield(index)) }
+    my_each { |index| mapped << (proc ? proc.call(index) : yield(index)) }
     mapped
   end
 
