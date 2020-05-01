@@ -51,3 +51,11 @@
 # # multiply_els method
 # puts 'multiply_els:'
 # p multiply_els(test_array)
+
+# array2 = %w(hell hey hi sup yea hafa)
+
+# new_array = []
+
+# array2.my_select { |ele| new_array << ele if ele.include?('h') }
+
+# print new_array
