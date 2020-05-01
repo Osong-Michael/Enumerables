@@ -6,6 +6,7 @@ RSpec.describe Enumerable do
   let(:array3) { [1, 2, 3, 4] }
   let(:array4) { [2, 4, 6, 8] }
   let(:array5) { [2, 4, 6, 8, 'jersey', %w[why me cr7 oa7]] }
+  let(:array6) { [4, 2, 3, 4, 4, 3, 5, 4, 4] }
   let(:new_array) {[]}
 
   describe '#my_each' do
@@ -116,6 +117,17 @@ RSpec.describe Enumerable do
 
   describe '#my_count' do
     
-    
+    it 'Returns the number of elements in the array(array size)' do
+      expect(array1.my_count).to eql(10)
+    end
+
+    it 'Returns the number of times an element appears in an array when argument is given' do
+      expect(array6.my_count(4)).to eql(5)
+    end
+
+    it 'Returns the number elements that match the condition in a given block' do
+      expect(array6.my_count { |ele| ele if ele.even? }).to eql(6)
+      
+    end
   end
 end
