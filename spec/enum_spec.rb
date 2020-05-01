@@ -97,4 +97,25 @@ RSpec.describe Enumerable do
     end
 
   end
+
+  describe '#my_none?' do
+    
+    it "Returns true when none of the elements in the array contains a \'t'\ " do
+      expect(array2.my_none?(/[t]/)).to be true
+    end
+
+    it 'Returns true if none of the elements in the array is an Integer' do
+      expect(array2.my_none?(Integer)).to be true
+    end
+
+    it 'Returns false if none of the elements in the array is greater than 7' do
+      expect(array1.my_none? { |ele| ele > 7 }).to be false
+    end
+
+  end
+
+  describe '#my_count' do
+    
+    
+  end
 end
