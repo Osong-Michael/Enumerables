@@ -131,7 +131,7 @@ RSpec.describe Enumerable do
   end
 
   describe '#my_map' do
-    
+
     it "Creates a new array containing the values returned after executing the code in the given block" do
       expect(array3.my_map {|x| x + 1}).to eql([2, 3, 4, 5])
     end
@@ -143,6 +143,31 @@ RSpec.describe Enumerable do
     it 'Returns the Enumerator when no block is given' do
       expect(array1.my_map).to be_kind_of(Enumerator)
     end
-    
+
   end
+
+  describe '#my_inject' do
+    
+    it "Returns the sum of all elements in an array when block is given" do
+      expect(array1.my_inject {|a, b| a + b}).to eql(45)
+    end
+
+    it "Returns the sum of all elements in an array when block is given plus the accumulator value when it is passed as an argument" do
+      expect(array1.my_inject(10) {|a, b| a + b}).to eql(55)
+    end
+
+    it 'Returns the product of all elements if argument is passed as a String' do
+      expect(array3.my_inject('*')).to eq(24)
+    end
+
+    it 'Returns the product of all elements if argument is passed as a Symbol' do
+      expect(array3.my_inject(:*)).to eq(24)
+    end
+
+    it 'Returns the product of all elements multiplied by the accumulator value given' do
+      expect(array3.my_inject(10, :*)).to eq(240)
+    end
+
+  end
+
 end
