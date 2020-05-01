@@ -78,7 +78,7 @@ RSpec.describe Enumerable do
 
   describe '#my_any?' do
     it "Returns false when none of the elements in the array contains a \'t'\ " do
-      expect(array2.my_any?(/[z]/)).to be false
+      expect(array2.my_any?(/[t]/)).to be false
     end
 
     it "Returns true if any of the elements in the array contains the string \'ello'\ " do
