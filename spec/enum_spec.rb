@@ -127,7 +127,22 @@ RSpec.describe Enumerable do
 
     it 'Returns the number elements that match the condition in a given block' do
       expect(array6.my_count { |ele| ele if ele.even? }).to eql(6)
-      
     end
+  end
+
+  describe '#my_map' do
+    
+    it "Creates a new array containing the values returned after executing the code in the given block" do
+      expect(array3.my_map {|x| x + 1}).to eql([2, 3, 4, 5])
+    end
+
+    it 'Returns an array of elements where even numbers have 100 added to them and odd numbers 200 added to them' do
+      expect(array3.my_map { |ele| ele.even? ? ele + 100 : ele + 200 }).to eq([201, 102, 203, 104])
+    end
+
+    it 'Returns the Enumerator when no block is given' do
+      expect(array1.my_map).to be_kind_of(Enumerator)
+    end
+    
   end
 end
