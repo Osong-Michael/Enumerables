@@ -1,4 +1,4 @@
-require '../enum.rb'
+require_relative '../enum.rb'
 
 RSpec.describe Enumerable do
   let(:array1) { [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }
@@ -20,6 +20,11 @@ RSpec.describe Enumerable do
       array1.my_each { |ele| new_array << ele if ele.even? && ele > 0 }
 
       expect(new_array).to eql(array4)
+    end
+
+    it 'Returns and array of all the elements in a given range' do
+      (1..4).my_each { |ele| new_array << ele }
+      expect(new_array).to eql(array3)
     end
 
     it 'Returns the Enumerator when no block is given' do
@@ -51,6 +56,16 @@ RSpec.describe Enumerable do
       expect(new_array).to eq(%w[hello hey hi holla])
     end
 
+    it 'Returns an empty array if no element matches what the argument describes' do
+      array2.my_select { |ele| new_array << ele if ele.include?('z') }
+      expect(new_array).to eq([])
+    end
+
+    it 'Returns an array of even numbers from a given range of numbers' do
+      (1...10).my_select { |ele| new_array << ele if ele.even? }
+      expect(new_array). to eql(array4)
+    end
+
     it 'Returns new array with specific data based on arguments' do
       array1.my_select { |ele| new_array << ele if ele.odd? && ele > 0 }
 
@@ -79,6 +94,10 @@ RSpec.describe Enumerable do
   describe '#my_any?' do
     it "Returns false when none of the elements in the array contains a \'t'\ " do
       expect(array2.my_any?(/[t]/)).to be false
+    end
+
+    it 'Returns false when no element in the range is divisible by 7' do
+      expect((1..6).my_any? { |ele| ele % 7 == 0 }).to be false
     end
 
     it "Returns true if any of the elements in the array contains the string \'ello'\ " do
