@@ -3,14 +3,14 @@ module Enumerable
   def my_each
     return to_enum :my_each unless block_given?
 
-    length.times { |index| yield(self[index]) }
+    size.times { |index| yield(to_a[index]) }
     self
   end
 
   def my_each_with_index
     return to_enum :my_each unless block_given?
 
-    length.times { |index| yield(self[index], index) }
+    size.times { |index| yield(to_a[index], index) }
     self
   end
 
